@@ -1,0 +1,23 @@
+name: Crear Pull Request de develop a main
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  pr-develop-to-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Crear Pull Request de develop a main
+        uses: repo-sync/pull-request@v2
+        with:
+          github_token: ${{ secrets.GH_PAT }}
+          source_branch: develop
+          destination_branch: main
+          pr_title: 'Auto PR: develop → main'
+          pr_body: 'Este PR fue generado automáticamente por GitHub Actions.'
+          pr_label: 'auto-pr'
